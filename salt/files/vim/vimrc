@@ -1,0 +1,67 @@
+" auto indent
+set autoindent
+set smartindent
+
+" filetype plugins to automagically
+" grab commands for particular filetypes.
+filetype plugin on
+filetype indent on
+
+" folding
+set foldcolumn=2
+set foldlevel=0
+set foldmethod=manual
+
+" general options
+set backspace=2           " let backspace work normally
+set history=50            " command history
+set laststatus=2          " status bar always on
+set nocompatible          " Use Vim defaults (much better!)
+set scrolloff=1           " dont let the curser get too close to the edge
+set showcmd               " Show (partial) command in status line.
+set showmatch             " Show matching brackets.
+set number                " line numbers on
+
+" search
+set ignorecase
+set hlsearch
+hi Search ctermbg=cyan
+hi Search ctermfg=black
+map <Space> :noh<CR>
+
+" syntax highlighting
+syntax enable
+
+" tabs & spaces
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+
+" terminal options
+set term=xterm-256color
+set t_Co=256
+
+" trim trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+
+" Tell vim to remember certain things when we exit
+"  '10  :  marks will be remembered for up to 10 previously edited files
+"  "100 :  will save up to 100 lines for each register
+"  :20  :  up to 20 lines of command-line history will be remembered
+"  %    :  saves and restores the buffer list
+"  n... :  where to save the viminfo files
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
+" function and auto-command to remember last cursor position in file
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+
+augroup resCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
