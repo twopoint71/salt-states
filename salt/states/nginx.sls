@@ -66,9 +66,20 @@ nginx_config_install_{{ account.user }}_{{ domain }}:
       - file: nginx_domain_log_dir_{{ account.user }}_{{ domain }}
     - replace: false
 
-nginx_config_setup_{{ account.user }}_{{ domain }}:
-  cmd.run:
-    - name: /bin/sed -i -e "s/_DOMAIN_/{{ domain }}/g" -e "s/_ACCOUNT_/{{ account.user }}/g" {{ nginx_conf }}
+nginx_config_setup_{{ account.user }}_{{ domain }}_domain:
+  file.replace:
+    - name: {{ nginx_conf }}
+    - pattern: _DOMAIN_
+    - repl: {{ domain }}
+    - require:
+      - file: nginx_config_install_{{ account.user }}_{{ domain }}
+      - file: nginx_cache_dir_{{ account.user }}_{{ domain }}
+
+nginx_config_setup_{{ account.user }}_{{ domain }}_account:
+  file.replace:
+    - name: {{ nginx_conf }}
+    - pattern: _ACCOUNT_
+    - repl: {{ account.user }}
     - require:
       - file: nginx_config_install_{{ account.user }}_{{ domain }}
       - file: nginx_cache_dir_{{ account.user }}_{{ domain }}
@@ -81,7 +92,8 @@ nginx_config_symlink_{{ account.user }}_{{ domain }}:
     - group: root
     - mode: 644
     - require:
-      - cmd: nginx_config_setup_{{ account.user }}_{{ domain }}
+      - file: nginx_config_setup_{{ account.user }}_{{ domain }}_account
+      - file: nginx_config_setup_{{ account.user }}_{{ domain }}_domain
 
 {% endfor %} # end domains loop
 {% endfor %} # end accounts loop
