@@ -7,4 +7,5 @@ basic_pkgs:
       - manpages
       - mlocate
       - nano
+      - openssl
       - tree
