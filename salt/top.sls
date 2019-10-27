@@ -8,6 +8,7 @@ base:
     - states/gpg
     - states/nginx
     - states/network
+    - states/php
     - states/root
     - states/tmux
     - states/users
