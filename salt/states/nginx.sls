@@ -32,7 +32,7 @@ nginx_htdocs_dir_{{ account.user }}_{{ domain }}:
 nginx_sample_index_html_{{ account.user }}_{{ domain }}:
   file.managed:
     - name: /home/{{ account.user }}/{{ domain }}/htdocs/index.html
-    - source: salt://files/nginx/index.html
+    - source: salt://salt/files/nginx/index.html
     - user: {{ account.user }}
     - group: {{ nginx_groups[grains.os_family] }}
     - mode: 644
@@ -57,7 +57,7 @@ nginx_cache_dir_{{ account.user }}_{{ domain }}:
 nginx_config_install_{{ account.user }}_{{ domain }}:
   file.managed:
     - name: {{ nginx_conf }}
-    - source: salt://files/nginx/default.conf
+    - source: salt://salt/files/nginx/default.conf
     - user: root
     - group: root
     - mode: 644
@@ -101,7 +101,7 @@ nginx_config_symlink_{{ account.user }}_{{ domain }}:
 nginx_config_install_master:
   file.managed:
     - name: /etc/nginx/nginx.conf
-    - source: salt://files/nginx/nginx.conf
+    - source: salt://salt/files/nginx/nginx.conf
     - user: root
     - group: root
     - mode: 644

@@ -6,7 +6,7 @@ include:
 root_vimrc:
   file.managed:
     - name: /root/.vimrc
-    - source: salt://files/vim/vimrc
+    - source: salt://salt/files/vim/vimrc
     - user: root
     - group: root
     - mode: 644
@@ -16,7 +16,7 @@ root_vimrc:
 root_bashrc:
   file.managed:
     - name: /root/.bashrc
-    - source: salt://files/root/bashrc
+    - source: salt://salt/files/root/bashrc
     - user: root
     - group: root
     - mode: 600

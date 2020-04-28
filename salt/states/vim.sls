@@ -12,7 +12,7 @@ vim_install:
 vimrc_install_{{ account.user }}:
   file.managed:
     - name: /home/{{ account.user }}/.vimrc
-    - source: salt://files/vim/vimrc
+    - source: salt://salt/files/vim/vimrc
     - user: {{ account.user }}
     - group: {{ account.user }}
     - mode: 644

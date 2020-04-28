@@ -5,7 +5,7 @@ include:
 sudoers:
   file.managed:
     - name: /etc/sudoers.d/nopass_allow
-    - source: salt://files/sudoers/nopass_allow
+    - source: salt://salt/files/sudoers/nopass_allow
     - user: root
     - group: root
     - mode: 644

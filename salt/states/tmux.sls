@@ -12,7 +12,7 @@ tmux_install:
 tmux_install_{{ account.user }}:
   file.managed:
     - name: /home/{{ account.user }}/.tmux.conf
-    - source: salt://files/tmux/tmux.conf
+    - source: salt://salt/files/tmux/tmux.conf
     - user: {{ account.user }}
     - group: {{ account.user }}
     - mode: 644
